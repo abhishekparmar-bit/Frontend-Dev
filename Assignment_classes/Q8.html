@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Box-Sizing Comparison</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fdfbfb, #ebedee);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .box {
+      width: 200px;
+      padding: 30px;
+      border: 8px solid #333;
+      background-color: #ffadad;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .border-box {
+      background-color: #9bf6ff;
+      box-sizing: border-box;
+    }
+
+    .description {
+      width: 100%;
+      text-align: center;
+      margin-top: 30px;
+      font-size: 16px;
+      color: #333;
+      max-width: 500px;
+      line-height: 1.5;
+    }
+
+    h2 {
+      text-align: center;
+      width: 100%;
+      color: #222;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Box-Sizing Comparison</h2>
+
+    <div class="box">
+      <strong>Default (content-box)</strong><br>
+      Width + Padding + Border → Total size increases
+    </div>
+
+    <div class="box border-box">
+      <strong>border-box</strong><br>
+      Width includes Padding + Border → Total size fixed
+    </div>
+
+    <div class="description">
+      The <b>box-sizing</b> property controls how element dimensions are calculated.<br>
+      In <b>content-box</b>, padding and border are added outside the set width.<br>
+      In <b>border-box</b>, the padding and border are included within the width, keeping the total size consistent.
+    </div>
+  </div>
+</body>
+</html>

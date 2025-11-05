@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Animation Demonstration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .animation-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .moving-box {
+            width: 80px;
+            height: 80px;
+            background-color: #007bff;
+            border-radius: 10px;
+            animation: moveBox 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes moveBox {
+            0% { transform: translateX(0); background-color: #007bff; }
+            50% { background-color: #17a2b8; }
+            100% { transform: translateX(200px); background-color: #28a745; }
+        }
+
+        .bouncing-ball {
+            width: 70px;
+            height: 70px;
+            background-color: #f39c12;
+            border-radius: 50%;
+            animation: bounce 2s ease-in-out infinite;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-150px); }
+        }
+
+        .color-text {
+            font-size: 32px;
+            font-weight: bold;
+            color: #2c3e50;
+            animation: colorChange 4s ease-in-out infinite alternate;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes colorChange {
+            0% { color: #2c3e50; }
+            25% { color: #007bff; }
+            50% { color: #e74c3c; }
+            75% { color: #27ae60; }
+            100% { color: #8e44ad; }
+        }
+    </style>
+</head>
+<body>
+    <div class="animation-container">
+        <div class="moving-box"></div>
+        <div class="bouncing-ball"></div>
+        <div class="color-text">CSS Animations in Action!</div>
+    </div>
+</body>
+</html>
