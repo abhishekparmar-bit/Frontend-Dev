@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Q4 - Special Offer Banner</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body{font-family:Arial;padding:20px;}
+    .banner{padding:14px;margin:8px 0;background:#ffdede;border-radius:6px;display:none;}
+    button{margin-right:6px;padding:6px 10px;}
+  </style>
+</head>
+<body>
+  <h2>Q4 — Special Offer Banner</h2>
+
+  <div style="margin-bottom:10px;">
+    <button id="hideBtn">Hide</button>
+    <button id="showBtn">Show</button>
+    <button id="slideBtn">Slide Up/Down</button>
+    <button id="fadeBtn">Fade In/Out</button>
+  </div>
+
+  <div class="banner" id="b1">Flash Sale — 50% OFF on select items!</div>
+  <div class="banner" id="b2">Limited Time — Free shipping over ₹999!</div>
+  <div class="banner" id="b3">Buy 1 Get 1 — Today only!</div>
+
+<script>
+$(function(){
+  // Initially show all banners
+  $(".banner").show();
+
+  // 1. Hide specific banners
+  $("#hideBtn").on("click", function(){ $(".banner").hide(); });
+
+  // 2. Show hidden banners
+  $("#showBtn").on("click", function(){ $(".banner").show(); });
+
+  // 3. Slide toggle
+  $("#slideBtn").on("click", function(){ $(".banner").slideToggle(); });
+
+  // 4. Fade toggle
+  $("#fadeBtn").on("click", function(){ $(".banner").fadeToggle(); });
+
+  // 5. Auto-rotate banners every 5 seconds with fadeIn/fadeOut
+  let idx = 0;
+  const banners = $(".banner");
+  function rotate(){
+    banners.stop(true,true).fadeOut(400);
+    banners.eq(idx).fadeIn(600);
+    idx = (idx + 1) % banners.length;
+  }
+  rotate();
+  const rotInterval = setInterval(rotate, 5000);
+});
+</script>
+</body>
+</html>
+
