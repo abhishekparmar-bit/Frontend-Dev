@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Q6 - Event Subscription Panel</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body{font-family:Arial;padding:20px;}
+    #topics .topic{padding:8px;border:1px solid #ddd;margin:6px 0;border-radius:6px;display:flex;justify-content:space-between;align-items:center;}
+    .success{color:green;margin-top:8px;}
+    button{margin-right:6px;}
+  </style>
+</head>
+<body>
+  <h2>Q6 — Event Subscription Panel</h2>
+
+  <button id="subscribe">Subscribe</button>
+  <button id="unsubscribe">Unsubscribe</button>
+  <button id="addTopic">Add New Topic</button>
+
+  <div id="topics"></div>
+  <div id="status"></div>
+
+<script>
+$(function(){
+  // 1. Subscribe → enable notifications
+  $("#subscribe").on("click", function(){
+    $("#status").text("Notifications enabled.").addClass("success");
+  });
+
+  // 2. Unsubscribe → disable notifications
+  $("#unsubscribe").on("click", function(){
+    $("#status").text("Notifications disabled.").removeClass("success");
+  });
+
+  // 3. Dynamically add new subscription topics → attach .on() for click events
+  let counter = 1;
+  $("#addTopic").on("click", function(){
+    const topic = $("<div class='topic' data-topic-id='"+counter+"'>"+
+                    "<span>Topic " + counter + "</span>" +
+                    "<span><button class='remove'>Remove</button></span></div>");
+    $("#topics").append(topic);
+    counter++;
+  });
+
+  // 4. Remove specific subscription → use event delegation to remove target topic
+  $(document).on("click", ".remove", function(){
+    $(this).closest(".topic").remove();
+    $("#status").text("Topic removed.").addClass("success").fadeOut(1200, function(){ $(this).show(); });
+  });
+
+  // 5. Show success message dynamically on action (already used above)
+  $("#subscribe").on("click", function(){
+    const msg = $("<div class='success'>Subscribed successfully ✓</div>");
+    $("#status").empty().append(msg);
+  });
+});
+</script>
+</body>
+</html>
