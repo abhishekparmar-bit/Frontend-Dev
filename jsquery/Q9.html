@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Q9 - Multi-jQuery Widgets</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body{font-family:Arial;padding:20px;}
+    #carousel{padding:10px;border:1px solid #ccc;margin-bottom:8px;}
+    .widget{display:inline-block;padding:8px;border:1px solid #ddd;margin-right:6px;cursor:pointer;}
+    .active{background:#fff0b3;}
+    #popup{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);padding:18px;background:#fff;border:1px solid #333;display:none;}
+  </style>
+</head>
+<body>
+  <h2>Q9 — Multi-jQuery Widgets (Simulated)</h2>
+
+  <div id="carousel">Carousel: <span id="slide">1</span></div>
+  <button id="nextSlide">Next Slide</button>
+
+  <div style="margin-top:12px;">
+    <div class="widget">Widget A</div>
+    <div class="widget">Widget B</div>
+    <div class="widget">Widget C</div>
+  </div>
+
+  <div style="margin-top:12px;">
+    <button id="showModal">Show Modal (v2 behavior)</button>
+  </div>
+
+  <div id="popup">Notification modal — click to close</div>
+
+<script>
+$(function(){
+  // Simulate carousel rotation (v1 behavior)
+  let slide = 1;
+  $("#nextSlide").on("click", function(){
+    slide = slide === 3 ? 1 : slide + 1;
+    $("#slide").text(slide);
+  });
+
+  // v1 highlights active widget
+  $(".widget").on("click", function(){
+    $(".widget").removeClass("active");
+    $(this).addClass("active");
+  });
+
+  // v2 manages modal popups for notifications
+  $("#showModal").on("click", function(){
+    $("#popup").fadeIn(200);
+  });
+
+  // close modal on click
+  $("#popup").on("click", function(){
+    $(this).fadeOut(150);
+  });
+
+  // Tooltips on hover (v2)
+  $(".widget").hover(function(){
+    const tip = $("<div class='tip'>Tooltip: " + $(this).text() + "</div>");
+    $(this).append(tip);
+  }, function(){
+    $(this).find(".tip").remove();
+  });
+
+  // Note: In a real multi-version setup you'd use jQuery.noConflict() and two script tags.
+});
+</script>
+</body>
+</html>
