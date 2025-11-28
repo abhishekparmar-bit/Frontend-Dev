@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Q8 - Dynamic Blog Posts</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body{font-family:Arial;padding:20px;}
+    .post{padding:10px;border:1px solid #ccc;margin:8px 0;border-radius:6px;}
+    .featured{background:#eaffef;}
+    .tag{font-size:12px;color:blue;margin-right:6px;}
+    button{margin-right:6px;}
+  </style>
+</head>
+<body>
+  <h2>Q8 — Dynamic Blog Posts</h2>
+
+  <button id="addNew">Add New Post</button>
+  <button id="prependFeat">Prepend Featured Post</button>
+  <button id="removeLast">Remove Last Post</button>
+
+  <div id="posts"></div>
+
+<script>
+$(function(){
+  // 1. Add New Post (append)
+  $("#addNew").on("click", function(){
+    const post = $("<div class='post'>New Blog Post — "+ new Date().toLocaleString() +"</div>");
+    $("#posts").append(post);
+    // 4. Add tags using before/after
+    post.before("<span class='tag'>#news</span>");
+  });
+
+  // 2. Prepend Featured Post
+  $("#prependFeat").on("click", function(){
+    const post = $("<div class='post featured'>Featured Post — "+ new Date().toLocaleString() +"</div>");
+    $("#posts").prepend(post);
+    post.after("<span class='tag'>#featured</span>");
+  });
+
+  // 3. Remove Last Post
+  $("#removeLast").on("click", function(){
+    $("#posts .post").last().remove();
+  });
+
+  // 5. Highlight posts with specific keyword dynamically
+  $(document).on("click", "#posts .post", function(){
+    if ($(this).text().indexOf("Featured") !== -1) {
+      $(this).css("box-shadow","0 0 10px rgba(34,139,34,0.2)");
+    } else {
+      $(this).css("box-shadow","none");
+    }
+  });
+});
+</script>
+</body>
+</html>
