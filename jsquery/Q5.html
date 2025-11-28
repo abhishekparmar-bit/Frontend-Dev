@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Q5 - Team Members Directory</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body{font-family:Arial;padding:20px;}
+    .department{border:1px solid #333;padding:12px;border-radius:6px;margin-bottom:12px;}
+    .manager{cursor:pointer;margin:0;}
+    .team{margin-top:8px;padding-left:18px;}
+    .emp{cursor:pointer;padding:4px 0;}
+    .highlight-sibling{background:#fff3cd;}
+  </style>
+</head>
+<body>
+  <h2>Q5 — Team Members Directory</h2>
+
+  <div class="department" data-dept="development" id="development">
+    <h3 class="manager">Manager — Alice</h3>
+    <ul class="team">
+      <li class="emp">Bob</li>
+      <li class="emp">Carol</li>
+      <li class="emp">Dave</li>
+    </ul>
+  </div>
+
+  <div class="department" data-dept="design">
+    <h3 class="manager">Manager — Ethan</h3>
+    <ul class="team">
+      <li class="emp">Fiona</li>
+      <li class="emp">George</li>
+    </ul>
+  </div>
+
+  <div style="margin-top:12px;">
+    <button id="randomEmp">Select Random Employee</button>
+    <button id="toggleDept">Collapse/Expand Development</button>
+  </div>
+
+<script>
+$(function(){
+  // 1. Click a manager → highlight direct reports
+  $(".manager").on("click", function(){
+    $(this).next(".team").children().css("background","#e6ffe6");
+  });
+
+  // 2. Hover on employee → show contact info using .next() style
+  $(".emp").hover(function(){
+    $(this).after("<div class='contact'>Contact: " + $(this).text().toLowerCase() + "@example.com</div>");
+  }, function(){
+    $(this).next(".contact").remove();
+  });
+
+  // 3. Click on department → change background of all members using .children()
+  $(".department").on("click", function(e){
+    $(this).children().css("background","#f0f8ff");
+  });
+
+  // 4. Select random employee → highlight sibling employees
+  $("#randomEmp").on("click", function(){
+    $(".emp").removeClass("highlight-sibling");
+    const all = $(".emp");
+    if (all.length === 0) return;
+    const idx = Math.floor(Math.random() * all.length);
+    const chosen = all.eq(idx);
+    chosen.siblings().addClass("highlight-sibling");
+  });
+
+  // 5. Collapse/expand team using .parent() and .find()
+  $("#toggleDept").on("click", function(){
+    $("#development .team").slideToggle();
+  });
+});
+</script>
+</body>
+</html>
+
