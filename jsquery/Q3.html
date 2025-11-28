@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Q3 - FAQ</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+.faq { padding: 10px; border: 1px solid #555; margin: 10px 0; }
+.answer { display: none; }
+.question { cursor: pointer; }
+.highlight { background: #fffa8b; }
+</style>
+</head>
+
+<body>
+
+<div class="faq">
+    <h3 class="question">What is jQuery?</h3>
+    <p class="answer">jQuery is a JavaScript library.</p>
+    <input class="faq-input" placeholder="Type here...">
+</div>
+
+<div class="faq">
+    <h3 class="question">What is AJAX?</h3>
+    <p class="answer">AJAX means asynchronous JavaScript.</p>
+    <input class="faq-input" placeholder="Type here...">
+</div>
+
+<script>
+$(document).ready(function () {
+
+    // 1. Toggle answer
+    $(".question").click(function () {
+        $(this).next(".answer").toggle();
+    });
+
+    // 2. hover color change
+    $(".question").hover(function(){
+        $(this).css("color", "blue");
+    }, function(){
+        $(this).css("color", "black");
+    });
+
+    // 3. double-click collapse all
+    $(".question").dblclick(function(){
+        $(".answer").hide();
+    });
+
+    // 4. focus on input highlights parent
+    $(".faq-input").focus(function(){
+        $(this).parent().addClass("highlight");
+    });
+
+    // 5. blur resets color
+    $(".faq-input").blur(function(){
+        $(this).parent().removeClass("highlight");
+    });
+
+});
+</script>
+
+</body>
+</html>
