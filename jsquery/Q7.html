@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Q7 - Search Courses</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body{font-family:Arial;padding:20px;}
+    #search{padding:8px;width:300px;margin-bottom:10px;}
+    .match{background:#fff3b0;}
+  </style>
+</head>
+<body>
+  <h2>Q7 — Search Courses</h2>
+  <input id="search" placeholder="Search courses...">
+  <p id="count"></p>
+
+  <ul id="courseList">
+    <li>JavaScript Basics</li>
+    <li>Full Stack Development</li>
+    <li>Python for Beginners</li>
+    <li>React Advanced</li>
+    <li>Data Structures & Algorithms</li>
+  </ul>
+
+<script>
+$(function(){
+  // 1. Keyup filter in real-time
+  $("#search").on("keyup", function(){
+    const q = $(this).val().trim().toLowerCase();
+    let matches = 0;
+    $("#courseList li").each(function(){
+      const txt = $(this).text();
+      if (q === "" || txt.toLowerCase().indexOf(q) !== -1) {
+        $(this).show();
+        // 2. Highlight matched text using .css()
+        if (q !== "") {
+          $(this).addClass("match");
+        } else {
+          $(this).removeClass("match");
+        }
+        matches++;
+      } else {
+        // 3. Toggle visibility of courses not matching
+        $(this).hide();
+      }
+    });
+    // 4. Show count
+    $("#count").text(matches + " courses found");
+    // 5. Clear search → handled when q === ""
+  });
+});
+</script>
+</body>
+</html>
